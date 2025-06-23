@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ССМ - Специальные Сварные Металлоконструкции</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: #1a3e72;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 1rem;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Герой-секция */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://vlgssm.ru/wp-content/uploads/2021/12/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideUp 1s ease-in-out;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: slideUp 1.2s ease-in-out;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            background-color: #ffd700;
+            color: #1a3e72;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        .hero-btn:hover {
+            background-color: #1a3e72;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #1a3e72;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #ffd700;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Отделы */
+        .departments {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .department-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .department-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
+        }
+        
+        .department-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .department-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .department-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .department-card:hover .department-img img {
+            transform: scale(1.1);
+        }
+        
+        .department-content {
+            padding: 1.5rem;
+        }
+        
+        .department-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a3e72;
+        }
+        
+        .department-content p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .department-btn {
+            display: inline-block;
+            background-color: #1a3e72;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .department-btn:hover {
+            background-color: #ffd700;
+            color: #1a3e72;
+        }
+        
+        /* Контакты */
+        .contacts {
+            background-color: #1a3e72;
+            color: white;
+            padding: 4rem 0;
+            margin-top: 4rem;
+        }
+        
+        .contacts-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #ffd700;
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 0.8rem;
+            color: #ffd700;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 1rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #ffd700;
+            color: #1a3e72;
+            transform: translateY(-5px);
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: #0d2a4a;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        footer p {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.jpg" alt="Логотип ССМ">
+                <div class="logo-text">
+                    <h1>ССМ</h1>
+                    <p>Специальные Сварные Металлоконструкции</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">О компании</a></li>
+                    <li><a href="#departments">Отделы</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Герой-секция -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>ССМ - Специальные Сварные Металлоконструкции</h2>
+            <p>Производство высококачественных металлоконструкций в Волгограде с 2005 года</p>
+            <a href="#departments" class="hero-btn">Наши отделы</a>
+        </div>
+    </section>
+    
+    <!-- О компании -->
+    <section class="container" id="about">
+        <div class="section-title">
+            <h2>О компании</h2>
+        </div>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
+            Компания "ССМ - Специальные Сварные Металлоконструкции" является ведущим производителем металлических конструкций в Волгоградском регионе. 
+            Мы специализируемся на проектировании, изготовлении и монтаже металлоконструкций любого уровня сложности. 
+            Наши клиенты - это промышленные предприятия, строительные компании и частные заказчики, которые ценят качество и надежность.
+        </p>
+    </section>
+    
+    <!-- Отделы -->
+    <section class="container" id="departments">
+        <div class="section-title">
+            <h2>Наши отделы</h2>
+        </div>
+        <div class="departments">
+            <div class="department-card">
+                <div class="department-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Производственный отдел">
+                </div>
+                <div class="department-content">
+                    <h3>Производственный отдел</h3>
+                    <p>Отвечает за изготовление металлоконструкций согласно техническим заданиям и чертежам.</p>
+                    <a href="production.html" class="department-btn">Подробнее</a>
+                </div>
+            </div>
+            
+            <div class="department-card">
+                <div class="department-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Отдел проектирования">
+                </div>
+                <div class="department-content">
+                    <h3>Отдел проектирования</h3>
+                    <p>Разработка проектной документации, 3D-моделирование и расчеты конструкций.</p>
+                    <a href="design.html" class="department-btn">Подробнее</a>
+                </div>
+            </div>
+            
+            <div class="department-card">
+                <div class="department-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Отдел контроля качества">
+                </div>
+                <div class="department-content">
+                    <h3>Отдел контроля качества</h3>
+                    <p>Обеспечение соответствия продукции стандартам и требованиям заказчиков.</p>
+                    <a href="quality.html" class="department-btn">Подробнее</a>
+                </div>
+            </div>
+            
+            <div class="department-card">
+                <div class="department-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Отдел логистики">
+                </div>
+                <div class="department-content">
+                    <h3>Отдел логистики</h3>
+                    <p>Организация доставки готовой продукции клиентам по всей России.</p>
+                    <a href="logistics.html" class="department-btn">Подробнее</a>
+                </div>
+            </div>
+            
+            <div class="department-card">
+                <div class="department-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Отдел продаж">
+                </div>
+                <div class="department-content">
+                    <h3>Отдел продаж</h3>
+                    <p>Консультации клиентов, подготовка коммерческих предложений и заключение договоров.</p>
+                    <a href="sales.html" class="department-btn">Подробнее</a>
+                </div>
+            </div>
+            
+            <div class="department-card">
+                <div class="department-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Отдел монтажа">
+                </div>
+                <div class="department-content">
+                    <h3>Отдел монтажа</h3>
+                    <p>Выполнение монтажных работ на объектах заказчиков по всей стране.</p>
+                    <a href="installation.html" class="department-btn">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Контакты -->
+    <section class="contacts" id="contacts">
+        <div class="contacts-container">
+            <div class="contact-info">
+                <h3>Контакты</h3>
+                <p><i>📍</i> г. Волгоград, ул. Промышленная, д. 15</p>
+                <p><i>📞</i> +7 (8442) 55-55-55</p>
+                <p><i>✉️</i> info@vlgssm.ru</p>
+                
+                <div class="social-links">
+                    <a href="#"><i>VK</i></a>
+                    <a href="#"><i>TG</i></a>
+                    <a href="#"><i>YT</i></a>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Режим работы</h3>
+                <p><i>🕘</i> Пн-Пт: 8:00 - 17:00</p>
+                <p><i>🕒</i> Сб: 9:00 - 14:00</p>
+                <p><i>🚫</i> Вс: выходной</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-links">
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">О компании</a></li>
+                <li><a href="#departments">Отделы</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+                <li><a href="privacy.html">Политика конфиденциальности</a></li>
+            </ul>
+        </div>
+        <p>© 2023 ССМ - Специальные Сварные Металлоконструкции. Все права защищены.</p>
+        <p>г. Волгоград</p>
+    </footer>
+    
+    <script>
+        // Анимация карточек при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.department-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

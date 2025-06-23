@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отдел логистики | ССМ - Специальные Сварные Металлоконструкции</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: #1a3e72;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 1rem;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 6rem auto 4rem;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #1a3e72;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #ffd700;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Описание отдела */
+        .department-description {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .department-description p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Услуги логистики */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border-top: 4px solid #1a3e72;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-icon {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background-color: #ffd700;
+            color: #1a3e72;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem;
+            color: #1a3e72;
+        }
+        
+        .service-card p {
+            color: #666;
+        }
+        
+        /* Транспортные средства */
+        .transport {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .transport-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .transport-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .transport-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .transport-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .transport-card:hover .transport-img img {
+            transform: scale(1.1);
+        }
+        
+        .transport-content {
+            padding: 1.5rem;
+        }
+        
+        .transport-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a3e72;
+        }
+        
+        .transport-content p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        /* Зона доставки */
+        .delivery-zone {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 3rem;
+        }
+        
+        .delivery-zone h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #1a3e72;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .delivery-zone h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #ffd700;
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .delivery-zone p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .zone-map {
+            margin-top: 2rem;
+            height: 300px;
+            background-color: #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        /* Контакты отдела */
+        .department-contacts {
+            background-color: #1a3e72;
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 3rem;
+        }
+        
+        .department-contacts h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .department-contacts h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #ffd700;
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .department-contacts p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .department-contacts i {
+            margin-right: 0.8rem;
+            color: #ffd700;
+        }
+        
+        /* Кнопка назад */
+        .back-btn {
+            display: inline-block;
+            background-color: #1a3e72;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+        
+        .back-btn:hover {
+            background-color: #ffd700;
+            color: #1a3e72;
+            transform: translateY(-3px);
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: #0d2a4a;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        footer p {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://via.placeholder.com/50x50" alt="Логотип ССМ">
+                <div class="logo-text">
+                    <h1>ССМ</h1>
+                    <p>Специальные Сварные Металлоконструкции</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="index.html#about">О компании</a></li>
+                    <li><a href="index.html#departments">Отделы</a></li>
+                    <li><a href="index.html#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Основной контент -->
+    <main class="container">
+        <div class="section-title">
+            <h2>Отдел логистики</h2>
+        </div>
+        
+        <div class="department-description">
+            <p>Отдел логистики компании "ССМ" обеспечивает надежную и своевременную доставку металлоконструкций на объекты заказчиков по всей России и странам СНГ.</p>
+            
+            <p>Наши специалисты разрабатывают оптимальные маршруты и выбирают наиболее подходящий транспорт для перевозки грузов с учетом габаритов, веса и срочности доставки.</p>
+            
+            <p>Основные направления работы отдела:</p>
+            <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                <li>Планирование и организация перевозок</li>
+                <li>Подбор транспортных средств</li>
+                <li>Оформление сопроводительных документов</li>
+                <li>Контроль загрузки и крепления грузов</li>
+                <li>Мониторинг движения транспорта</li>
+                <li>Таможенное оформление для международных перевозок</li>
+            </ul>
+            
+            <p>Мы гарантируем сохранность груза на всех этапах транспортировки и строгое соблюдение согласованных сроков.</p>
+        </div>
+        
+        <div class="section-title">
+            <h2>Наши услуги</h2>
+        </div>
+        
+        <div class="services">
+            <div class="service-card">
+                <div class="service-icon">1</div>
+                <h3>Автомобильные перевозки</h3>
+                <p>Доставка грузов автомобильным транспортом различной грузоподъемности по России и СНГ.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">2</div>
+                <h3>Железнодорожные перевозки</h3>
+                <p>Организация перевозок негабаритных грузов железнодорожным транспортом.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">3</div>
+                <h3>Морские и речные перевозки</h3>
+                <p>Транспортировка крупногабаритных конструкций водным транспортом.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">4</div>
+                <h3>Мультимодальные перевозки</h3>
+                <p>Комбинированные маршруты с использованием нескольких видов транспорта.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">5</div>
+                <h3>Экспедирование грузов</h3>
+                <p>Сопровождение грузов и контроль на всех этапах транспортировки.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">6</div>
+                <h3>Страхование грузов</h3>
+                <p>Оформление страховых полисов для защиты груза во время перевозки.</p>
+            </div>
+        </div>
+        
+        <div class="section-title">
+            <h2>Наш транспорт</h2>
+        </div>
+        
+        <div class="transport">
+            <div class="transport-card">
+                <div class="transport-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Тентованный полуприцеп">
+                </div>
+                <div class="transport-content">
+                    <h3>Тентованные полуприцепы</h3>
+                    <p>Грузоподъемность до 20 тонн, длина до 13.6 м, ширина до 2.5 м, высота до 2.7 м.</p>
+                </div>
+            </div>
+            
+            <div class="transport-card">
+                <div class="transport-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Открытая платформа">
+                </div>
+                <div class="transport-content">
+                    <h3>Открытые платформы</h3>
+                    <p>Для перевозки негабаритных грузов, грузоподъемность до 40 тонн.</p>
+                </div>
+            </div>
+            
+            <div class="transport-card">
+                <div class="transport-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Трал">
+                </div>
+                <div class="transport-content">
+                    <h3>Тралы</h3>
+                    <p>Для перевозки особо тяжелых и крупногабаритных конструкций, грузоподъемность до 100 тонн.</p>
+                </div>
+            </div>
+            
+            <div class="transport-card">
+                <div class="transport-img">
+                    <img src="https://via.placeholder.com/400x300" alt="Контейнеровоз">
+                </div>
+                <div class="transport-content">
+                    <h3>Контейнеровозы</h3>
+                    <p>Для перевозки металлоконструкций в контейнерах 20' и 40'.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="delivery-zone">
+            <h3>География доставки</h3>
+            <p>Мы осуществляем доставку металлоконструкций по всей территории России, а также в страны СНГ. Основные регионы, в которые мы регулярно выполняем перевозки:</p>
+            
+            <div class="zone-map">
+                Карта зоны доставки
+            </div>
+            
+            <p>Для уточнения стоимости и сроков доставки в ваш регион свяжитесь с нашими менеджерами.</p>
+        </div>
+        
+        <div class="department-contacts">
+            <h3>Контакты отдела логистики</h3>
+            <p><i>📞</i> Телефон: +7 (8442) 55-55-58</p>
+            <p><i>✉️</i> Email: logistics@vlgssm.ru</p>
+            <p><i>👨‍💼</i> Начальник отдела: Кузнецов Дмитрий Иванович</p>
+            <p><i>🕘</i> График работы: Пн-Пт 8:00 - 17:00</p>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="index.html#departments" class="back-btn">Вернуться к списку отделов</a>
+        </div>
+    </main>
+    
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-links">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="index.html#about">О компании</a></li>
+                <li><a href="index.html#departments">Отделы</a></li>
+                <li><a href="index.html#contacts">Контакты</a></li>
+                <li><a href="privacy.html">Политика конфиденциальности</a></li>
+            </ul>
+        </div>
+        <p>© 2023 ССМ - Специальные Сварные Металлоконструкции. Все права защищены.</p>
+        <p>г. Волгоград</p>
+    </footer>
+</body>
+</html>
